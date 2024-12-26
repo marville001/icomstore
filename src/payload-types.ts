@@ -679,12 +679,19 @@ export interface Product {
     [k: string]: unknown;
   } | null;
   price: number;
+  compareAtPrice?: number | null;
   images?:
     | {
-        image?: (string | null) | Media;
+        image: string | Media;
         id?: string | null;
       }[]
     | null;
+  status: 'draft' | 'published';
+  inventory: {
+    trackInventory?: boolean | null;
+    quantity: number;
+    allowBackorder?: boolean | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1165,11 +1172,20 @@ export interface ProductsSelect<T extends boolean = true> {
   store?: T;
   description?: T;
   price?: T;
+  compareAtPrice?: T;
   images?:
     | T
     | {
         image?: T;
         id?: T;
+      };
+  status?: T;
+  inventory?:
+    | T
+    | {
+        trackInventory?: T;
+        quantity?: T;
+        allowBackorder?: T;
       };
   updatedAt?: T;
   createdAt?: T;

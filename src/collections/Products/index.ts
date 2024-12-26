@@ -24,6 +24,7 @@ export const Products: CollectionConfig = {
       type: 'relationship',
       relationTo: 'stores',
       required: true,
+      hasMany: false,
     },
     {
       name: 'description',
@@ -33,6 +34,12 @@ export const Products: CollectionConfig = {
       name: 'price',
       type: 'number',
       required: true,
+      min: 0,
+    },
+    {
+      name: 'compareAtPrice',
+      type: 'number',
+      min: 0,
     },
     {
       name: 'images',
@@ -42,6 +49,45 @@ export const Products: CollectionConfig = {
           name: 'image',
           type: 'upload',
           relationTo: 'media',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'status',
+      type: 'select',
+      options: [
+        {
+          label: 'Draft',
+          value: 'draft',
+        },
+        {
+          label: 'Published',
+          value: 'published',
+        },
+      ],
+      defaultValue: 'draft',
+      required: true,
+    },
+    {
+      name: 'inventory',
+      type: 'group',
+      fields: [
+        {
+          name: 'trackInventory',
+          type: 'checkbox',
+          defaultValue: true,
+        },
+        {
+          name: 'quantity',
+          type: 'number',
+          required: true,
+          defaultValue: 0,
+        },
+        {
+          name: 'allowBackorder',
+          type: 'checkbox',
+          defaultValue: false,
         },
       ],
     },
