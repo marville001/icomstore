@@ -12,11 +12,18 @@ export const Users: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    defaultColumns: ['name', 'email'],
+    defaultColumns: ['name', 'email', 'role'],
     useAsTitle: 'name',
   },
   auth: true,
   fields: [
+    {
+      name: 'role',
+      type: 'select',
+      options: ['admin', 'store-owner', 'customer'],
+      required: true,
+      defaultValue: 'customer',
+    },
     {
       name: 'name',
       type: 'text',
